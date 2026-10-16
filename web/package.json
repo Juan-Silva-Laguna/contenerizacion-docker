@@ -1,0 +1,10 @@
+{
+  "name": "app-colombia",
+  "version": "1.0.0",
+  "description": "Aplicación de municipios dockerizada",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.6.0"
+  }
+}
