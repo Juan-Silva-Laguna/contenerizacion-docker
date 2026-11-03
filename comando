@@ -1,0 +1,19 @@
+# 1. Crear el cluster local
+kind create cluster --name practica
+
+# 2. Construir la imagen de la app y cargarla en el cluster
+docker build -t deploy-kube-web:1.0 web
+kind load docker-image deploy-kube-web:1.0 --name practica
+
+# 3. Crear el ConfigMap con db.sql (MySQL lo ejecuta al iniciar)
+kubectl create configmap mysql-init --from-file=init.sql=db.sql
+
+# 4. Aplicar todos los manifiestos
+kubectl apply -f k8s/
+
+# 5. Revisar el estado (espera a que los pods estén Running)
+kubectl get pods
+kubectl get svc
+
+# 6. Abrir la app en http://localhost:3000
+kubectl port-forward service/web-app 3000:3000
